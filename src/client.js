@@ -13,4 +13,4 @@ module.exports = class {
     timeout: 1000,
     headers: {'Authorization': this.token}
 });
-}
+};
