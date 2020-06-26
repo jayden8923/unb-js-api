@@ -1,0 +1,14 @@
+{
+  "name": "unb-js-api",
+  "version": "1.0.0",
+  "description": "My version of the unb api.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "src": "^1.1.2"
+  }
+}
