@@ -6,24 +6,27 @@ module.exports = class {
    this.token = apitoken;
   if (!version || typeof version !== 'number') this.version = "v1";
   else this.version = 'v' + version;
+  let token = apitoken;
+    this.RequestCreator = axios.create({
+    baseURL: `https://unbelievaboat.com/api/${this.version}`,
+    timeout: 1000,
+    headers: { 'Authorization': apitoken }
+});
   };
 
-   const instance = axios.create({
-    baseURL: 'https://unbelievaboat.com/api/' + this.version,
-    timeout: 1000,
-    headers: {'Authorization': this.token}
-});
 
 /**
  * Get a user's balance.
  * @param {string} guildid
  * @param {string} userid
  */
-this.getUserBalance = function(guildid, userid) {
+getUserBalance = async function(guildid, userid) {
   if (!guildid) throw new Error('No guild ID provided');
   else if (!userid) throw new Error('No user ID provided');
   else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
   else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
-return instance.get(`/guilds/{guild.id}/users/{user.id}`);
+  let requestedData = await this.RequestCreator.get('/guilds/' + guildid + '/users/' + userid);
+  return Promise.resolve(requestedData.data);
+
 }
 };
