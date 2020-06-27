@@ -27,6 +27,40 @@ getUserBalance = async function(guildid, userid) {
   else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
   let requestedData = await this.RequestCreator.get('/guilds/' + guildid + '/users/' + userid);
   return Promise.resolve(requestedData.data);
-
 }
+ /**
+  * Set a user's bank balance to a specified amount.
+  * @param {string} guildid
+  * @param {string} userid
+  * @param {number} amount
+  */
+    setUserBankBalance = async function(guildid, userid, amount, reason) {
+  if (!guildid) throw new Error('No guild ID provided');
+  else if (!userid) throw new Error('No user ID provided');
+  else if (!amount) throw new Error('No amount provided');
+else if (!reason) reason = "No reason specified";
+  else if (typeof amount !== 'number') throw new TypeError('Amount must be a number');
+  else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
+  else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
+  let requestedData = await this.RequestCreator.put('/guilds/' + guildid + '/users/' + userid, { params: { bank: amount } });
+  return Promise.resolve(requestedData.data);
+}
+ /**
+  * Set a user's cash balance to a specified amount.
+  * @param {string} guildid
+  * @param {string} userid
+  * @param {number} amount
+  */
+    setUserCashBalance = async function(guildid, userid, amount, reason) {
+  if (!guildid) throw new Error('No guild ID provided');
+  else if (!userid) throw new Error('No user ID provided');
+  else if (!amount) throw new Error('No amount provided');
+else if (!reason) reason = "No reason specified";
+  else if (typeof amount !== 'number') throw new TypeError('Amount must be a number');
+  else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
+  else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
+  let requestedData = await this.RequestCreator.put('/guilds/' + guildid + '/users/' + userid, { params: { cash: amount, reason: reason } });
+  return Promise.resolve(requestedData.data);
+}
+  
 };

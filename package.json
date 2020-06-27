@@ -2,7 +2,7 @@
   "name": "unb-js-api",
   "version": "1.0.0",
   "description": "My version of the unb api.",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {},
   "keywords": [],
   "author": "",

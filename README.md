@@ -19,3 +19,9 @@ Outputs to:
   total: 'a number/ a string for Infinity'
 }
 ```
+
+##### Methods
+getUserBalance(guildid, userid)
+
+setUserBankBalance(guildid, userid, amount, [reason])
+setUserCashBalance(guildid, userid, amount, [reason])
