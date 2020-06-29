@@ -1,6 +1,5 @@
-
 {
-  "name": "unb-js-api",
+  "name": "@jayden8923/unb-js-api",
   "version": "1.0.0",
   "description": "My version of the unb api.",
   "main": "index.js",
