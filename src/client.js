@@ -1,9 +1,10 @@
 const axios = require('axios');
-module.exports = class {
+module.exports.client = class {
   constructor(apitoken, version) {
     if (!apitoken) throw new Error('No API token provided');
     if (typeof apitoken !== 'string') throw new TypeError('API token must be a string');
    this.token = apitoken;
+   module.exports.token = apitoken;
   if (!version || typeof version !== 'number') this.version = "v1";
   else this.version = 'v' + version;
   let token = apitoken;
@@ -12,6 +13,7 @@ module.exports = class {
     timeout: 1000,
     headers: { 'Authorization': apitoken }
 });
+module.exports.instance = this.RequestCreator; 
   };
 
 
@@ -29,37 +31,47 @@ getUserBalance = async function(guildid, userid) {
   return Promise.resolve(requestedData.data);
 }
  /**
+  * Set a user's balance to a specified amount.
+  * @param {string} guildid
+  * @param {string} userid
+  * @param {number} amount
+  * @param {string} toSetPlace
+  */
+    setUserBalance = async function(guildid, userid, amount, toSetPlace, reason) {
+  if (!guildid) throw new Error('No guild ID provided');
+  else if (!userid) throw new Error('No user ID provided');
+  else if (!amount) throw new Error('No amount provided');
+  if (toSetPlace.toLowerCase() !== 'bank' || toSetPlace.toLowerCase() !== 'cash') throw new Error('Must be cash or bank');
+else if (!reason) reason = "No reason specified";
+  else if (typeof amount !== 'number') throw new TypeError('Amount must be a number');
+  else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
+  else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
+let options = { params: {} };
+options.params[toSetPlace.toLowerCase()] = amount;
+options.params[reason] = reason; 
+  let requestedData = await this.RequestCreator.put('/guilds/' + guildid + '/users/' + userid, options);
+  return Promise.resolve(requestedData.data);
+}
+ /**
   * Set a user's bank balance to a specified amount.
   * @param {string} guildid
   * @param {string} userid
   * @param {number} amount
+  * @param {string} toSetPlace
   */
-    setUserBankBalance = async function(guildid, userid, amount, reason) {
+    addToUserBalance = async function(guildid, userid, amount, toSetPlace, reason) {
   if (!guildid) throw new Error('No guild ID provided');
   else if (!userid) throw new Error('No user ID provided');
   else if (!amount) throw new Error('No amount provided');
+  if (toSetPlace.toLowerCase() !== 'bank' || toSetPlace.toLowerCase() !== 'cash') throw new Error('Must be cash or bank');
 else if (!reason) reason = "No reason specified";
   else if (typeof amount !== 'number') throw new TypeError('Amount must be a number');
   else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
   else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
-  let requestedData = await this.RequestCreator.put('/guilds/' + guildid + '/users/' + userid, { params: { bank: amount } });
-  return Promise.resolve(requestedData.data);
-}
- /**
-  * Set a user's cash balance to a specified amount.
-  * @param {string} guildid
-  * @param {string} userid
-  * @param {number} amount
-  */
-    setUserCashBalance = async function(guildid, userid, amount, reason) {
-  if (!guildid) throw new Error('No guild ID provided');
-  else if (!userid) throw new Error('No user ID provided');
-  else if (!amount) throw new Error('No amount provided');
-else if (!reason) reason = "No reason specified";
-  else if (typeof amount !== 'number') throw new TypeError('Amount must be a number');
-  else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
-  else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
-  let requestedData = await this.RequestCreator.put('/guilds/' + guildid + '/users/' + userid, { params: { cash: amount, reason: reason } });
+let options = { params: {} };
+options.params[toSetPlace.toLowerCase()] = amount;
+options.params[reason] = reason; 
+  let requestedData = await this.RequestCreator.patch('/guilds/' + guildid + '/users/' + userid, options);
   return Promise.resolve(requestedData.data);
 }
   

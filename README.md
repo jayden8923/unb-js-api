@@ -4,8 +4,8 @@ This is my version of unb-api.
 
 ### Example Usage:
 ```js
-const unb-js-api = require('@jayden8923/unb-js-api'); 
-const apiclient = new unb-js-api('api-token');
+const { client } = require('@jayden8923/unb-js-api'); 
+const apiclient = new client('api-token');
 
 apiclient.getUserBalance('guildid', 'userid').then(console.log);
 ```
@@ -21,7 +21,16 @@ Outputs to:
 ```
 
 ##### Methods
+
+Fields surrounded by [] are optional
+
+Fields surrounded by <> have 2 valid values
+---
 getUserBalance(guildid, userid)
 
-setUserBankBalance(guildid, userid, amount, [reason])
-setUserCashBalance(guildid, userid, amount, [reason])
+setUserBalance(guildid, userid, amount, <bank | cash>, [reason]) 
+Returns Promise<User Object>
+
+addToUserBalance(guildid, userid, amount,<bank | cash>, [reason])
+Set amount to a negative number to decrease the balance
+Returns Promise<User Object>
