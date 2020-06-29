@@ -1,21 +1,20 @@
-
 {
   "name": "unb-js-api",
   "version": "1.0.0",
-  "description": "My version of the unb api.",
+  "description": "My version of the UnbelievaBoat API wrapper",
   "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "jayden8923",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.19.2"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jayden8923/unb-js-api.git"
   },
+  "keywords": [
+    "discord"
+  ],
+  "author": "jayden8923",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/jayden8923/unb-js-api/issues"
   },
