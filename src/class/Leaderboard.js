@@ -1,4 +1,4 @@
-const { instance, token } = require('../client').instance;
+const { instance, token } = require('../client');
 module.exports = class Leaderboard {
   constructor (guildid) {
     this.guildid = guildid;

@@ -1,3 +1,2 @@
-require('./src/client');  
-require('./src/Leaderboard');
-require('./src/User'); 
+module.exports.Client = require('./src/client');  
+module.exports.Leaderboard = require('./src/class/Leaderboard');

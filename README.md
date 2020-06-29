@@ -4,8 +4,8 @@ This is my version of unb-api.
 
 ### Example Usage:
 ```js
-const { client } = require('@jayden8923/unb-js-api'); 
-const apiclient = new client('api-token');
+const { Client } = require('@jayden8923/unb-js-api'); 
+const apiclient = new Client('api-token');
 
 apiclient.getUserBalance('guildid', 'userid').then(console.log);
 ```
@@ -31,6 +31,6 @@ getUserBalance(guildid, userid)
 setUserBalance(guildid, userid, amount, <bank | cash>, [reason]) 
 Returns Promise<User Object>
 
-addToUserBalance(guildid, userid, amount,<bank | cash>, [reason])
+addToUserBalance(guildid, userid, amount, <bank | cash>, [reason])
 Set amount to a negative number to decrease the balance
 Returns Promise<User Object>
