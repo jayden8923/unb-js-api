@@ -43,11 +43,11 @@ getUserBalance = async function(guildid, userid) {
   */
     setUserBalance = async function(guildid, userid, amount, toSetPlace, reason) {
   if (!guildid) {
-    if (!this.guildid) Throw new Error('No guild ID provided')
+    if (!this.guildid) throw new Error('No guild ID provided')
     else guildid = this.guildid;
   };   if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
   if (!userid) {
-    Throw new Error('No user ID provided');
+    throw new Error('No user ID provided');
   }; if (typeof guildid !== 'string') throw new TypeError('User ID must be a string');
   else if (!amount) throw new Error('No amount provided');
   if (toSetPlace.toLowerCase() !== 'bank' || toSetPlace.toLowerCase() !== 'cash') throw new Error('Must be cash or bank');
@@ -68,11 +68,11 @@ options.params[reason] = reason;
   */
     addToUserBalance = async function(guildid, userid, amount, toSetPlace, reason) {
   if (!guildid) {
-    if (!this.guildid) Throw new Error('No guild ID provided')
+    if (!this.guildid) throw new Error('No guild ID provided')
     else guildid = this.guildid;
   };   if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
   if (!userid) {
-    Throw new Error('No user ID provided');
+    throw new Error('No user ID provided');
   }; if (typeof guildid !== 'string') throw new TypeError('User ID must be a string');
   else if (!userid) throw new Error('No user ID provided');
   else if (!amount) throw new Error('No amount provided');
