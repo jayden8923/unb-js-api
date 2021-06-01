@@ -1,8 +1,12 @@
 const axios = require('axios');
 module.exports.client = class {
-  constructor(apitoken, version) {
+  constructor(apitoken, version, guildid) {
     if (!apitoken) throw new Error('No API token provided');
     if (typeof apitoken !== 'string') throw new TypeError('API token must be a string');
+    if (guildid) {
+      if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string')
+      else this.guildid = guildid;
+    }
    this.token = apitoken;
    module.exports.token = apitoken;
   if (!version || typeof version !== 'number') this.version = "v1";
@@ -38,14 +42,17 @@ getUserBalance = async function(guildid, userid) {
   * @param {string} toSetPlace
   */
     setUserBalance = async function(guildid, userid, amount, toSetPlace, reason) {
-  if (!guildid) throw new Error('No guild ID provided');
-  else if (!userid) throw new Error('No user ID provided');
+  if (!guildid) {
+    if (!this.guildid) Throw new Error('No guild ID provided')
+    else guildid = this.guildid;
+  };   if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
+  if (!userid) {
+    Throw new Error('No user ID provided');
+  }; if (typeof guildid !== 'string') throw new TypeError('User ID must be a string');
   else if (!amount) throw new Error('No amount provided');
   if (toSetPlace.toLowerCase() !== 'bank' || toSetPlace.toLowerCase() !== 'cash') throw new Error('Must be cash or bank');
 else if (!reason) reason = "No reason specified";
   else if (typeof amount !== 'number') throw new TypeError('Amount must be a number');
-  else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
-  else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
 let options = { params: {} };
 options.params[toSetPlace.toLowerCase()] = amount;
 options.params[reason] = reason; 
@@ -60,14 +67,18 @@ options.params[reason] = reason;
   * @param {string} toSetPlace
   */
     addToUserBalance = async function(guildid, userid, amount, toSetPlace, reason) {
-  if (!guildid) throw new Error('No guild ID provided');
+  if (!guildid) {
+    if (!this.guildid) Throw new Error('No guild ID provided')
+    else guildid = this.guildid;
+  };   if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
+  if (!userid) {
+    Throw new Error('No user ID provided');
+  }; if (typeof guildid !== 'string') throw new TypeError('User ID must be a string');
   else if (!userid) throw new Error('No user ID provided');
   else if (!amount) throw new Error('No amount provided');
   if (toSetPlace.toLowerCase() !== 'bank' || toSetPlace.toLowerCase() !== 'cash') throw new Error('Must be cash or bank');
 else if (!reason) reason = "No reason specified";
   else if (typeof amount !== 'number') throw new TypeError('Amount must be a number');
-  else if (typeof guildid !== 'string') throw new TypeError('Guild ID must be a string');
-  else if (typeof userid !== 'string') throw new TypeError('User ID must be a string');
 let options = { params: {} };
 options.params[toSetPlace.toLowerCase()] = amount;
 options.params[reason] = reason; 
